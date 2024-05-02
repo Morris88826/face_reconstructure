@@ -9,6 +9,7 @@ from libs.plot import plot_landmarks
 from libs.interpolation import interpolate_triangle_density
 from libs.landmark import get_face_landmark, forward_warp, find_triangles, color_query
 from libs.transformation.similarity import find_SimilarityMatrix
+from libs.transformation.affine import find_AffineMatrix
 from libs.naive_warp import naive_warp
 
 def find_best_H(query_image, image_bank_dir):
