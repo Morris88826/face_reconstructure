@@ -93,7 +93,7 @@ if __name__ == "__main__":
     axes[0,2].set_title('Best from the Image Bank')
 
     plot_landmarks(axes[1,0], warpped_landmarks)
-    axes[1,0].set_title('Warpped Landmarks - Density: {}'.format(density))
+    axes[1,0].set_title('Warped Landmarks - Density: {}'.format(density))
 
     naive_result = naive_warp(query_image, query_image_lmk, best_front_face_lmk)
     axes[1,1].imshow(naive_result)
