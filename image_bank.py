@@ -49,7 +49,7 @@ def find_front_faces(subject_dir, num_samples=10, detector=None):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         
         if find_front_face(image, detector=detector):
-            front_faces_path.append(image)
+            front_faces_path.append(image_path)
         
         if len(front_faces_path) == num_samples:
             break
@@ -82,13 +82,13 @@ if __name__ == "__main__":
     front_faces_path = find_front_faces(args.subject, detector=detector)
 
     if os.path.exists(out_path):
-        with open(out_path, "rb") as f:
+        with open(out_path, "r") as f:
             front_faces = json.load(f)
     else:
         front_faces = {}
 
     print(front_faces_path)
-    with open(out_path, "wb") as f:
+    with open(out_path, "w") as f:
         front_faces[subject_name] = front_faces_path
         json.dump(front_faces, f, indent=4)
         

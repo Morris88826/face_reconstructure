@@ -15,7 +15,6 @@ def r2_sequence(num):
         points.append((x%1,y%1))
     return points
 
-
 # generates points in a triangle using paralleogram method applied to R2 sequence
 def interpolate_triangle_points(A, B, C, num_points):
     # vectors of triangle
@@ -66,6 +65,7 @@ def interpolate_triangle_density(A, B, C, density, verbose=False):
         print(str(num_points) + " points generated")
         
     return points
+
 
 if __name__ == "__main__":
     verbose_dir  = "./verbose"

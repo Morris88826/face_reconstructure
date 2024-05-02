@@ -4,6 +4,7 @@ import argparse
 import numpy as np
 import mediapipe as mp
 import matplotlib.pyplot as plt
+from collections import defaultdict
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 try:
@@ -57,6 +58,39 @@ def forward_warp(points, M):
 def inverse_warp(points, M):
     M_inv = np.linalg.inv(M)
     return forward_warp(points, M_inv)
+
+def find_triangles(edges=mp.solutions.face_mesh.FACEMESH_TESSELATION):
+    graph = defaultdict(set) 
+    for u, v in edges:
+        graph[u].add(v)
+        graph[v].add(u)
+
+    triangles = set()
+    for u, v in edges:
+        common_neighbors = graph[u].intersection(graph[v])
+        for w in common_neighbors:
+            triangle = tuple(sorted((u, v, w)))
+            triangles.add(triangle)
+    
+    return np.array(list(triangles))
+
+def color_query(image, points):
+    colors = []
+    valid_points = []
+    for point in points:
+        x, y = point[:2]
+        x = int(x)
+        y = int(y)
+        
+        if x < 0 or x >= image.shape[1] or y < 0 or y >= image.shape[0]:
+            continue
+
+        valid_points.append(point)
+        colors.append(image[y, x])
+
+    colors = np.array(colors)    
+    valid_points = np.array(valid_points)   
+    return colors, valid_points
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
