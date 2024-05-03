@@ -7,7 +7,7 @@ Applying the transformation and adding the corresponding color to the features w
 
 ---
 # Downloading the Dataset
-To retrieve the dataset execute the following command
+To retrieve the dataset execute the following command then unzip the data.
 
 ```
 python libs/download.py
