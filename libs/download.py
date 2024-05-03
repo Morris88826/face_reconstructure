@@ -1,3 +1,4 @@
+import os
 import gdown
 import argparse
 
@@ -6,5 +7,8 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=str, help='Output file name', default='./dataset/VGGface2_HQ.zip')
     args = parser.parse_args()
 
+    if not os.path.exists('./dataset'):
+        os.makedirs('./dataset')
+        
     url = "https://drive.google.com/uc?id=1cPn7GRUX3150VOTkfuL4kVJIXnUdQgn6"
     gdown.download(url, args.output, quiet=False)

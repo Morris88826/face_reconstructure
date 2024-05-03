@@ -1,0 +1,1 @@
+zip project.zip -r . -x "dataset"
