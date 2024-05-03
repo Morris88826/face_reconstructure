@@ -8,3 +8,6 @@ Applying the transformation and adding the corresponding color to the features w
 ---
 # How to Execute
 
+Run the following command:
+```
+python main.py --query_image <path to input image>
