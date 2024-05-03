@@ -6,8 +6,20 @@ This can be done by extracting spatial features of a side view face and estimati
 Applying the transformation and adding the corresponding color to the features would yield a reconstructed front-facing view of the individual.
 
 ---
+# Downloading the Dataset
+To retrieve the dataset execute the following command
+
+```
+python libs/download.py
+```
+
+---
 # How to Execute
 
 Run the following command:
 ```
 python main.py --query_image <path to input image>
+```
+
+
+---
