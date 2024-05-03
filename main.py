@@ -19,10 +19,16 @@ def find_best_H(query_image, image_bank_dir):
     min_error = 1e9
     best_H = None
     best_front_face_lmk = None
+    rotation = None
     for front_face_lmk in tqdm.tqdm(image_bank_paths):
         front_face_lmk = np.load(front_face_lmk)
         
-        H = find_SimilarityMatrix(query_image_lmk, front_face_lmk)
+        H, params = find_SimilarityMatrix(query_image_lmk, front_face_lmk, verbose=True)
+
+        _, _, _, _, rx, ry, rz = params
+        rx = np.rad2deg(rx)
+        ry = np.rad2deg(ry)
+        rz = np.rad2deg(rz)
 
         query_image_warped = forward_warp(query_image_lmk, H)
         error = np.mean(np.square(query_image_warped - front_face_lmk))
@@ -31,8 +37,9 @@ def find_best_H(query_image, image_bank_dir):
             min_error = error
             best_H = H
             best_front_face_lmk = front_face_lmk
+            rotation = (rx, ry, rz)
 
-    return best_H, query_image_lmk, best_front_face_lmk
+    return best_H, query_image_lmk, best_front_face_lmk, rotation
 
 def get_dense_landmarks(query_image_lmk, density):
     triangles = find_triangles()
@@ -71,7 +78,9 @@ if __name__ == "__main__":
     query_image = cv2.imread(query_image_path)
     query_image = cv2.cvtColor(query_image, cv2.COLOR_BGR2RGB)
 
-    best_H, query_image_lmk, best_front_face_lmk = find_best_H(query_image, image_bank_dir)
+    best_H, query_image_lmk, best_front_face_lmk, rotation = find_best_H(query_image, image_bank_dir)
+
+    print("Estimated Rotation: ", rotation)
 
     ##### from sparse landmarks to dense landmarks
     dense_query_image_lmk = get_dense_landmarks(query_image_lmk, density)
@@ -108,6 +117,9 @@ if __name__ == "__main__":
     if not os.path.exists(verbose_dir):
         os.makedirs(verbose_dir)
     out_path = os.path.join(verbose_dir, 'front_face_recovery.png')
+    fig.tight_layout()
     fig.savefig(out_path)
+
+    print("Results saved at: {}".format(out_path))
 
 
