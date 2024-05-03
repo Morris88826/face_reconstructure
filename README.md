@@ -15,7 +15,7 @@ python libs/download.py
 Along with dataset you also have to download the image bank required. Download the image bank from the google drive link:
 https://drive.google.com/drive/folders/1RJ7RPkz-Ug1oUzqGDCK2P7YFAObxPr2X?usp=sharing
 
-And place it in the `dataset` folder created when the above command was executed
+And place it in the `dataset/image_bank/samples` folder created when the above command was executed
 
 ---
 # How to Execute
