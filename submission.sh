@@ -1,1 +1,1 @@
-zip project.zip -r . -x "dataset"
+zip -r project.zip checkpoints Report.pdf README.md libs verbose main.py image_bank.py requirements.txt -x "libs/__pycache__/*"
