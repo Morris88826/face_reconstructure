@@ -1,4 +1,4 @@
-# Multi-Faceted Deepfake Dataset: Frame-Level Labeled Synthesis Across Diverse Deepfake Techniques
+# Front Facial Reconstruction for Deep Fake Applications
 
 Our project aims to design a model that reconstructs a person’s face in frontal position from side-view images. 
 We believe that leveraging multiple image inputs will enhance the synthesis quality when the source image isn’t of a frontal face. 
@@ -7,3 +7,4 @@ Applying the transformation and adding the corresponding color to the features w
 
 ---
 # How to Execute
+
